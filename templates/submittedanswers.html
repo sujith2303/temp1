@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .summary-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333333;
+            margin-bottom: 10px;
+        }
+
+        .score-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            margin: auto;
+        }
+
+        .score-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 18px;
+            color: #333333;
+        }
+
+        .feedback-container {
+            margin-top: 20px;
+            display: none;  /* Initially hidden */
+        }
+
+        .feedback-button {
+            cursor: pointer;
+            color: #3498db;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="summary-container">
+        <h1>Summary</h1>
+        <div>
+                {% if (score//num_questions)>=0.36 %}
+                    <p style="color: green">You Passed</p>
+                {% else %}
+                <p style="color: red">You Failed. Try Again.....!!!!!!</p>
+                {% endif %}
+        </div>
+
+        <div class="score-container">
+            <div class="score-text">{{score}}/{{num_questions}}</div>
+        </div>
+
+        <div class="feedback-container" id="feedbackContainer">
+            {% for i in range(1,num_questions+1) %}
+            Question {{i}}: 
+            <p style="color:Blue">Actual : {{answers[i-1]}} </p>
+            <p style="color:red">Predicted : {{user_responses[i-1]}}</p>
+            {% endfor %}
+        </div>
+
+        <p class="feedback-button" onclick="toggleFeedback()">Show Feedback</p>
+    </div>
+
+    <script>
+        function toggleFeedback() {
+            var feedbackContainer = document.getElementById('feedbackContainer');
+            feedbackContainer.style.display = (feedbackContainer.style.display === 'none') ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>

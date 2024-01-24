@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}LoginPage{% endblock %}
+{% block content %}
+<form action = '#' method = "post">
+    <style>
+        li {
+      display: inline;
+    }
+    </style>
+    <label for="customRange1" class="form-label">num_questions</label>
+    <li>
+    <input type="number" class="form-range" min="1" max="15" name="num_questions" value ="0" required>
+    <label for="dropdown">ChooseTypeOfQuestion</label>
+        <select id="dropdown" name="selected_option">
+            <option value="MCQS`">MCQS</option>
+            <option value="FIBS">Fill in the blanks</option>
+            <option value="TrueOrFalse">True or False</option>
+            <option value="Essay">Essay Answers</option>
+        </select>
+    </li>
+    <input type="file" id="myFile" name="filename" required>
+    <input type ="submit" name ='submit' >
+</form>
+
+{% endblock %}
